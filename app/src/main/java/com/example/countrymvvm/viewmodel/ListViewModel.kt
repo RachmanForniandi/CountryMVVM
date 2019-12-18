@@ -33,6 +33,8 @@ class ListViewModel:ViewModel() {
         showDataCountry()
     }
 
+
+
     private fun showDataCountry() {
         /*val mockData = listOf(
             Country("CountryA"),
@@ -46,7 +48,6 @@ class ListViewModel:ViewModel() {
             Country("CountryI"),
             Country("CountryJ")
         )
-
         countryLoadWhenError.value = false
         loading.value = false
         countries.value = mockData*/
