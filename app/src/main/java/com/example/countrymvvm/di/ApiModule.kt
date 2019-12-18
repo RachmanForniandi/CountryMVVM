@@ -2,6 +2,7 @@ package com.example.countrymvvm.di
 
 import androidx.transition.Visibility
 import com.example.countrymvvm.networkUtils.APIService
+import com.example.countrymvvm.networkUtils.NetworkConfig
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -23,4 +24,11 @@ class ApiModule {
             .build()
             .create(APIService::class.java)
     }
+
+    @Provides
+    fun provideCountryApiService():NetworkConfig{
+        return NetworkConfig()
+    }
+
+
 }

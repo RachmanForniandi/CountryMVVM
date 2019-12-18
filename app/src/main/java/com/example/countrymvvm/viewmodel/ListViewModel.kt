@@ -2,6 +2,7 @@ package com.example.countrymvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.countrymvvm.di.DaggerApiComponent
 import com.example.countrymvvm.model.Country
 import com.example.countrymvvm.networkUtils.APIService
 import com.example.countrymvvm.networkUtils.NetworkConfig
@@ -10,10 +11,18 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class ListViewModel:ViewModel() {
 
-    private val networkConfig = NetworkConfig()
+    @Inject
+    lateinit var networkConfig: NetworkConfig
+
+
+    init {
+        DaggerApiComponent.create().injectViewModel(this)
+    }
+
     private val disposable = CompositeDisposable()
 
     val countries = MutableLiveData<List<Country>>()
