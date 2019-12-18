@@ -1,23 +1,20 @@
 package com.example.countrymvvm.networkUtils
 
+import com.example.countrymvvm.di.DaggerApiComponent
 import com.example.countrymvvm.model.Country
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class NetworkConfig() {
 
-    private val BASE_URL = "https://raw.githubusercontent.com";
-    private val apiService: APIService
+    @Inject
+    lateinit var apiService: APIService
 
     init {
-        apiService = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(APIService::class.java)
+        DaggerApiComponent.create().inject(this)
     }
 
     fun getDataOfCountries():Single<List<Country>>{
